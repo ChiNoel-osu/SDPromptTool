@@ -1,0 +1,46 @@
+﻿<Window x:Class="SDPromptTool.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:SDPromptTool"
+		xmlns:view="clr-namespace:SDPromptTool.View"
+		mc:Ignorable="d"
+		Title="Prompt Tools"
+		Height="450"
+		Width="600"
+		Background="#1E1E1E"
+		KeyDown="Window_KeyDown">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="GlobalResDictionary.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
+	<Grid>
+		<TabControl x:Name="MainTab"
+					Background="Transparent"
+					Margin="4"
+					BorderBrush="CornflowerBlue">
+			<TabItem Style="{StaticResource TabItemStyle1}"
+					 Header="Prompt Selector"
+					 Background="Transparent"
+					 Foreground="White">
+				<view:PromptSelector />
+			</TabItem>
+			<TabItem Style="{StaticResource TabItemStyle1}"
+					 Header="Danbooru Tags Wiki"
+					 Background="Transparent"
+					 Foreground="White">
+				<view:WebTab />
+			</TabItem>
+			<TabItem Style="{StaticResource TabItemStyle1}"
+					 Header="Settings"
+					 Background="Transparent"
+					 Foreground="White">
+
+			</TabItem>
+		</TabControl>
+	</Grid>
+</Window>

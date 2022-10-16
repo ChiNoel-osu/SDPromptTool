@@ -1,0 +1,12 @@
+[
+  {
+    "Name": "!00 Test",
+    "Prompts": "Thank you for downloading this program.\r\nBy navigating to ./UserPresets/ and open the .json file, you can delete this preset.",
+    "Notes": "Test.\r\nPLS FIND BUGS"
+  },
+  {
+    "Name": "General #01",
+    "Prompts": "{masterpiece}, {anime}, waifu, {cute}, {solo}, small breasts, {navel}, happy, relieved, extremely detailed, ",
+    "Notes": "idk man\r\nyou can build on top of this if you want"
+  }
+]
