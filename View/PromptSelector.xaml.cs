@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using static SDPromptTool.ViewModel.PromptSelectorVM;
 using static SDPromptTool.ViewModel.SharedPresetVM;
 
 namespace SDPromptTool.View
@@ -152,6 +153,5 @@ namespace SDPromptTool.View
 			PSaveBtn.IsEnabled = NSaveBtn.IsEnabled = true;
 			return;
 		}
-
 	}
 }

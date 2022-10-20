@@ -25,6 +25,7 @@ namespace SDPromptTool.ViewModel
 		{
 			public string Tag { get; set; }
 			public int Weight { get; set; } = 0;
+			public bool ReadOnly { get; set; } = true;
 		}
 
 		[ObservableProperty]
@@ -40,11 +41,12 @@ namespace SDPromptTool.ViewModel
 			try
 			{   //Danbooru API
 				tagResponse = await httpClient.GetAsync(new Uri(
-"https://danbooru.donmai.us/tags.json?search[name_matches]=*" + _TextBoxText + "*&search[order]=name&search[hide_empty]=1&search[post_count]=%3E10&limit=1000"));
+"https://danbooru.donmai.us/tags.json?search[name_matches]=*" + _TextBoxText + "*&search[order]=name&search[hide_empty]=1&search[post_count]=%3E100&limit=1000"));
 			}
 			catch (Exception e)
 			{
 				MessageBox.Show("Use a VPN or try again:\n" + e.Message, "Cannot get list from Danbooru API.");
+				TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false });	//Custom tag.
 				IsNotSearching = true;
 				return;
 			}
@@ -57,18 +59,14 @@ namespace SDPromptTool.ViewModel
 				arrEnu.MoveNext();
 				CustomListBoxItem CLBI = new CustomListBoxItem();
 				CLBI.Tag = arrEnu.Current.GetProperty("name").GetString();
-				CLBI.Weight = 0;
 				TagList.Add(CLBI);
 			}
-
-
+			TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly=false });	//Custom tag.
 			IsNotSearching = true;
 		}
 
 		public string PullTag(IList TagList)
 		{
-
-
 			string prompts = string.Empty;
 			foreach (CustomListBoxItem item in TagList)
 			{

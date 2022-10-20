@@ -11,7 +11,7 @@
 		Width="600"
 		Background="#1E1E1E"
 		KeyDown="Window_KeyDown">
-	<Window.Resources>
+	<Window.Resources> 
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="GlobalResDictionary.xaml" />
@@ -34,6 +34,12 @@
 					 Background="Transparent"
 					 Foreground="White">
 				<view:WebTab />
+			</TabItem>
+			<TabItem Style="{StaticResource TabItemStyle1}"
+					 Header="Preset Manager"
+					 Background="Transparent"
+					 Foreground="White">
+				<view:PromptSelector />
 			</TabItem>
 			<TabItem Style="{StaticResource TabItemStyle1}"
 					 Header="Settings"

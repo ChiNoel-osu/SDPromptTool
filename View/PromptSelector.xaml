@@ -77,7 +77,7 @@
 									Tag="{Binding Prompts}"
 									ToolTip="{Binding Notes}"
 									Foreground="White"
-									Padding="1"/>
+									Padding="1" />
 						</DataTemplate>
 					</ComboBox.ItemTemplate>
 					<ComboBox.ItemContainerStyle>
@@ -96,7 +96,8 @@
 						</Style>
 					</ComboBox.ItemContainerStyle>
 				</ComboBox>
-				<Button x:Name="PSaveBtn" DockPanel.Dock="Left"
+				<Button x:Name="PSaveBtn"
+						DockPanel.Dock="Left"
 						Style="{DynamicResource UniBtnStyle}"
 						Content="➦"
 						Width="30"
@@ -209,7 +210,8 @@
 						</Style>
 					</ComboBox.ItemContainerStyle>
 				</ComboBox>
-				<Button x:Name="NSaveBtn" DockPanel.Dock="Left"
+				<Button x:Name="NSaveBtn"
+						DockPanel.Dock="Left"
 						Style="{DynamicResource UniBtnStyle}"
 						Content="➦"
 						Width="30"
@@ -295,7 +297,7 @@
 						Content="Search!"
 						IsEnabled="{Binding PSVM.IsNotSearching, Mode=OneWay}"
 						IsEnabledChanged="SearchBtn_IsEnabledChanged"
-						Command="{Binding PSVM.RefreshTagCommand}" />
+						Command="{Binding PSVM.RefreshTagCommand}"/>
 			</Grid>
 			<ListBox DockPanel.Dock="Bottom"
 					 x:Name="TagList"
@@ -310,11 +312,12 @@
 						<DockPanel Margin="-5,-5,0,-5">
 							<TextBox Style="{DynamicResource UniTextBoxStyle}"
 									 MaxWidth="{Binding ElementName=TagList, Path=ActualWidth, Converter={StaticResource LTBWConverter}}"
+									 MinWidth="40"
 									 BorderBrush="Transparent"
 									 Foreground="White"
 									 DockPanel.Dock="Left"
 									 Grid.Column="0"
-									 IsReadOnly="True"
+									 IsReadOnly="{Binding ReadOnly}"
 									 Text="{Binding Tag}"
 									 HorizontalAlignment="Left"
 									 VerticalContentAlignment="Center"
