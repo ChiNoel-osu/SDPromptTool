@@ -39,7 +39,7 @@
 					 Header="Preset Manager"
 					 Background="Transparent"
 					 Foreground="White">
-				<view:PromptSelector />
+				<view:PresetManager />
 			</TabItem>
 			<TabItem Style="{StaticResource TabItemStyle1}"
 					 Header="Settings"

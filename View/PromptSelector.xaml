@@ -26,7 +26,6 @@
 			<RowDefinition Height="*" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-
 		<DockPanel Grid.Column="0"
 				   Grid.Row="0"
 				   Margin="5,0,5,5">
@@ -101,7 +100,6 @@
 						Style="{DynamicResource UniBtnStyle}"
 						Content="➦"
 						Width="30"
-						Height="30"
 						Margin="5,5,5,5"
 						RenderTransformOrigin="0.5,0.5"
 						Click="PSaveBtn_Click">
@@ -271,7 +269,6 @@
 				</DockPanel>
 			</Grid>
 		</DockPanel>
-
 		<DockPanel Grid.Row="0"
 				   Grid.RowSpan="2"
 				   Grid.Column="1"
@@ -316,7 +313,6 @@
 									 BorderBrush="Transparent"
 									 Foreground="White"
 									 DockPanel.Dock="Left"
-									 Grid.Column="0"
 									 IsReadOnly="{Binding ReadOnly}"
 									 Text="{Binding Tag}"
 									 HorizontalAlignment="Left"
@@ -324,7 +320,6 @@
 									 Margin="2,4,0,4" />
 							<Label	DockPanel.Dock="Right"
 									Foreground="White"
-									Grid.Column="1"
 									Content="{Binding Weight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 									Tag="{Binding Tag}"
 									HorizontalAlignment="Right"

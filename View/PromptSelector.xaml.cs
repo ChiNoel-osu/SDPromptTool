@@ -60,12 +60,12 @@ namespace SDPromptTool.View
 		}
 
 		#region Button events
-		private void PullTagButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		private void PullTagButton_Click(object sender, RoutedEventArgs e)
 		{
 			PPromptsBox.AppendText(MainWindow.MainVM.PSVM.PullTag(TagList.SelectedItems));
 			TagList.SelectedItem = null;
 		}
-		private void CopyBtn_Click(object sender, System.Windows.RoutedEventArgs e)
+		private void CopyBtn_Click(object sender, RoutedEventArgs e)
 		{
 			if (PPromptsBox.Text != string.Empty)
 			{
@@ -114,7 +114,6 @@ namespace SDPromptTool.View
 			}
 		}
 		#endregion
-
 		#endregion
 
 		private void PSaveBtn_Click(object sender, RoutedEventArgs e)

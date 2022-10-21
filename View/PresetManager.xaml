@@ -1,0 +1,237 @@
+﻿<UserControl x:Class="SDPromptTool.View.PresetManager"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:local="clr-namespace:SDPromptTool.View"
+			 xmlns:viewmodel="clr-namespace:SDPromptTool.ViewModel"
+			 d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+			 mc:Ignorable="d"
+			 d:DesignHeight="420"
+			 d:DesignWidth="580">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="/GlobalResDictionary.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="2*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<DockPanel Grid.Column="0"
+				   Grid.Row="0"
+				   Margin="5,0,5,5">
+			<DockPanel DockPanel.Dock="Bottom">
+				<Button DockPanel.Dock="Right"
+						Style="{DynamicResource UniBtnStyle}"
+						Content="Copy"
+						Width="50"
+						Height="30"
+						Margin="0,5"
+						Click="PCopyBtn_Click" />
+				<Button DockPanel.Dock="Right"
+						Style="{DynamicResource UniBtnStyle}"
+						Content="Clear"
+						Width="50"
+						Height="30"
+						Margin="10,0"
+						Click="PClrBtn_Click" />
+				<Button Name="PSaveBtn"
+						HorizontalAlignment="Left"
+						Style="{DynamicResource UniBtnStyle}"
+						Content="Save"
+						Width="50"
+						Height="30"
+						Margin="0,5"
+						Click="PSaveBtn_Click" />
+				<Button Name="PNewBtn"
+						HorizontalAlignment="Left"
+						Style="{DynamicResource UniBtnStyle}"
+						Content="New"
+						Width="50"
+						Height="30"
+						Margin="10,0"
+						Click="PNewBtn_Click" />
+			</DockPanel>
+			<Grid DockPanel.Dock="Bottom">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="5*" />
+				</Grid.ColumnDefinitions>
+				<DockPanel Grid.Column="0">
+					<Label DockPanel.Dock="Top"
+						   Content="Notes"
+						   Foreground="White"
+						   Padding="2,0,0,2"
+						   FontSize="14"
+						   FontWeight="SemiBold" />
+					<TextBox DockPanel.Dock="Bottom"
+							 x:Name="PNotes"
+							 TextWrapping="Wrap"
+							 AcceptsReturn="True"
+							 Style="{DynamicResource UniTextBoxStyle}" />
+				</DockPanel>
+				<DockPanel Grid.Column="1">
+					<Label DockPanel.Dock="Top"
+						   Content="Prompts"
+						   Foreground="White"
+						   Padding="2,0,0,2"
+						   FontSize="14"
+						   FontWeight="SemiBold" />
+					<TextBox DockPanel.Dock="Bottom"
+							 x:Name="PPromptsBox"
+							 FontSize="14"
+							 AcceptsReturn="True"
+							 TextWrapping="Wrap"
+							 Style="{DynamicResource UniTextBoxStyle}" />
+				</DockPanel>
+			</Grid>
+		</DockPanel>
+		<DockPanel Grid.Column="0"
+				   Grid.Row="1"
+				   Margin="5,-5,5,0">
+			<DockPanel DockPanel.Dock="Bottom">
+				<Button DockPanel.Dock="Right"
+						Style="{DynamicResource UniBtnStyle}"
+						Content="Copy"
+						Width="50"
+						Height="30"
+						Margin="5,5,0,5"
+						Click="NCopyBtn_Click" />
+				<Button DockPanel.Dock="Right"
+						Style="{DynamicResource UniBtnStyle}"
+						Content="Clear"
+						Width="50"
+						Height="30"
+						Margin="5"
+						Click="NClrBtn_Click" />
+				<Button Name="NSaveBtn"
+						HorizontalAlignment="Left"
+						Style="{DynamicResource UniBtnStyle}"
+						Content="Save"
+						Width="50"
+						Height="30"
+						Margin="0,5"
+						Click="NSaveBtn_Click" />
+				<Button Name="NNewBtn"
+						HorizontalAlignment="Left"
+						Style="{DynamicResource UniBtnStyle}"
+						Content="New"
+						Width="50"
+						Height="30"
+						Margin="10,0"
+						Click="NNewBtn_Click" />
+			</DockPanel>
+			<Grid DockPanel.Dock="Bottom">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="5*" />
+				</Grid.ColumnDefinitions>
+				<DockPanel Grid.Column="0">
+					<Label DockPanel.Dock="Top"
+						   Content="Notes"
+						   Foreground="White"
+						   Padding="2,0,0,2"
+						   FontSize="14"
+						   FontWeight="SemiBold" />
+					<TextBox DockPanel.Dock="Bottom"
+							 x:Name="NNotes"
+							 TextWrapping="Wrap"
+							 AcceptsReturn="True"
+							 Style="{DynamicResource UniTextBoxStyle}" />
+				</DockPanel>
+				<DockPanel Grid.Column="1">
+					<Label DockPanel.Dock="Top"
+						   Content="Negative Prompts"
+						   Foreground="White"
+						   Padding="2,0,0,2"
+						   FontSize="14"
+						   FontWeight="SemiBold" />
+					<TextBox DockPanel.Dock="Bottom"
+							 x:Name="NPromptsBox"
+							 FontSize="14"
+							 AcceptsReturn="True"
+							 TextWrapping="Wrap"
+							 Style="{DynamicResource UniTextBoxStyle}" />
+				</DockPanel>
+			</Grid>
+		</DockPanel>
+		<ListBox Name="PList"
+				 Grid.Row="0"
+				 Grid.Column="1"
+				 Background="Transparent"
+				 Margin="5,5,5,10"
+				 ItemsSource="{Binding Presets.PPresets}"
+				 HorizontalContentAlignment="Stretch"
+				 SelectionChanged="PListChanged">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<DockPanel MouseUp="PList_MouseUp">
+						<Label DockPanel.Dock="Left"
+							   HorizontalAlignment="Left"
+							   VerticalContentAlignment="Center"
+							   Content="{Binding Name}"
+							   Padding="2"
+							   Foreground="White" />
+						<Button Style="{DynamicResource DelBtnStyle}"
+								Tag="{Binding Name}"
+								BorderBrush="DarkRed"
+								Content="❌"
+								FontSize="10"
+								Padding="0,0,1,2"
+								DockPanel.Dock="Right"
+								Height="20"
+								Width="20"
+								HorizontalAlignment="Right"
+								VerticalAlignment="Center"
+								HorizontalContentAlignment="Center"
+								VerticalContentAlignment="Center"
+								Click="PDelBtn_Click" />
+					</DockPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<ListBox Name="NList"
+				 Grid.Row="1"
+				 Grid.Column="1"
+				 Background="Transparent"
+				 Margin="5,0,5,5"
+				 ItemsSource="{Binding Presets.NPresets}"
+				 HorizontalContentAlignment="Stretch"
+				 SelectionChanged="NListChanged">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<DockPanel MouseUp="NList_MouseUp">
+						<Label DockPanel.Dock="Left"
+							   HorizontalAlignment="Left"
+							   VerticalContentAlignment="Center"
+							   Content="{Binding Name}"
+							   Padding="2"
+							   Foreground="White" />
+						<Button Style="{DynamicResource DelBtnStyle}"
+								Tag="{Binding Name}"
+								BorderBrush="DarkRed"
+								Content="❌"
+								FontSize="10"
+								Padding="0,0,1,2"
+								DockPanel.Dock="Right"
+								Height="20"
+								Width="20"
+								HorizontalAlignment="Right"
+								VerticalAlignment="Center"
+								HorizontalContentAlignment="Center"
+								VerticalContentAlignment="Center"
+								Click="NDelBtn_Click" />
+					</DockPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Grid>
+</UserControl>

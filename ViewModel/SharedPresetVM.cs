@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Printing;
 using System.Security.AccessControl;
+using static SDPromptTool.ViewModel.SharedPresetVM;
 
 namespace SDPromptTool.ViewModel
 {
@@ -56,6 +57,58 @@ namespace SDPromptTool.ViewModel
 				File.WriteAllText(NPresetPath, str);
 			else
 				File.WriteAllText(PPresetPath, str);
+		}
+		/// <summary>
+		/// Delete first occurrence of preset that matches the given name.
+		/// </summary>
+		/// <param name="presetName">The preset name. If duplicates exists, this will delete the first one.</param>
+		/// <param name="IsNegative">Weather the preset is negative prompt or not.</param>
+		public void DeletePreset(string presetName, bool IsNegative)
+		{
+			System.Collections.Generic.IEnumerator<Preset> pstEnu;
+			if (IsNegative)
+				pstEnu = NPresets.GetEnumerator();
+			else
+				pstEnu = PPresets.GetEnumerator();
+			do
+				pstEnu.MoveNext();
+			while (pstEnu.Current.Name != presetName);
+			if (IsNegative)
+				NPresets.Remove(pstEnu.Current);
+			else
+				PPresets.Remove(pstEnu.Current);
+			if (IsNegative)
+				File.WriteAllText(NPresetPath, JsonConvert.SerializeObject(NPresets, Formatting.Indented));
+			else
+				File.WriteAllText(PPresetPath, JsonConvert.SerializeObject(PPresets, Formatting.Indented));
+		}
+		public void UpdatePreset(string presetName, bool IsNegative, string updatedPrompts, string updatedNotes)
+		{
+			System.Collections.Generic.IEnumerator<Preset> pstEnu;
+			if (IsNegative)
+				pstEnu = NPresets.GetEnumerator();
+			else
+				pstEnu = PPresets.GetEnumerator();
+			ushort index = 0;
+			do
+			{
+				pstEnu.MoveNext();
+				index++;
+			}
+			while (pstEnu.Current.Name != presetName);
+			index--;    //List index starts from 0.
+			pstEnu.Current.Prompts = updatedPrompts;
+			pstEnu.Current.Notes = updatedNotes;
+			if (IsNegative)
+			{
+				NPresets[index] = pstEnu.Current;
+				File.WriteAllText(NPresetPath, JsonConvert.SerializeObject(NPresets, Formatting.Indented));
+			}
+			else
+			{
+				PPresets[index] = pstEnu.Current;
+				File.WriteAllText(PPresetPath, JsonConvert.SerializeObject(PPresets, Formatting.Indented));
+			}
 		}
 
 		public SharedPresetVM()
