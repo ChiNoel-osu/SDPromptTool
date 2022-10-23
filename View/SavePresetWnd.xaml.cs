@@ -25,7 +25,7 @@ namespace SDPromptTool.View
 
 		private void SaveBtn_Click(object sender, RoutedEventArgs e)
 		{
-			SnapsToDevicePixels = true;
+			SnapsToDevicePixels = true;	//STDP acts as a IsSaving flag.
 			Close();
 		}
 

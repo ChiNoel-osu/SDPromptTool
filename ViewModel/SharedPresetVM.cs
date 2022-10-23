@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Printing;
 using System.Security.AccessControl;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Data;
 using static SDPromptTool.ViewModel.SharedPresetVM;
 
 namespace SDPromptTool.ViewModel
@@ -49,14 +52,20 @@ namespace SDPromptTool.ViewModel
 				PPresets = JsonConvert.DeserializeObject<ObservableCollection<Preset>>(PresetsJson);
 		}
 
-		public void AddNewPreset(Preset ps, ObservableCollection<Preset> presets, bool IsNegative)
+		public Task AddNewPreset(Preset ps, ObservableCollection<Preset> presets, bool IsNegative)
 		{
-			presets.Add(ps);
-			string str = JsonConvert.SerializeObject(presets, Formatting.Indented);
-			if (IsNegative)
-				File.WriteAllText(NPresetPath, str);
-			else
-				File.WriteAllText(PPresetPath, str);
+			Task task = new Task(() =>
+			{
+				//Thread.Sleep(2500);	//Test
+				presets.Add(ps);
+				string str = JsonConvert.SerializeObject(presets, Formatting.Indented);
+				if (IsNegative)
+					File.WriteAllText(NPresetPath, str);
+				else
+					File.WriteAllText(PPresetPath, str);
+			});
+			task.Start();
+			return task;
 		}
 		/// <summary>
 		/// Delete first occurrence of preset that matches the given name.
@@ -82,39 +91,48 @@ namespace SDPromptTool.ViewModel
 			else
 				File.WriteAllText(PPresetPath, JsonConvert.SerializeObject(PPresets, Formatting.Indented));
 		}
-		public void UpdatePreset(string presetName, bool IsNegative, string updatedPrompts, string updatedNotes)
+		public Task UpdatePreset(string presetName, bool IsNegative, string updatedPrompts, string updatedNotes)
 		{
-			System.Collections.Generic.IEnumerator<Preset> pstEnu;
-			if (IsNegative)
-				pstEnu = NPresets.GetEnumerator();
-			else
-				pstEnu = PPresets.GetEnumerator();
-			ushort index = 0;
-			do
+			Task task = new Task(() =>
 			{
-				pstEnu.MoveNext();
-				index++;
-			}
-			while (pstEnu.Current.Name != presetName);
-			index--;    //List index starts from 0.
-			pstEnu.Current.Prompts = updatedPrompts;
-			pstEnu.Current.Notes = updatedNotes;
-			if (IsNegative)
-			{
-				NPresets[index] = pstEnu.Current;
-				File.WriteAllText(NPresetPath, JsonConvert.SerializeObject(NPresets, Formatting.Indented));
-			}
-			else
-			{
-				PPresets[index] = pstEnu.Current;
-				File.WriteAllText(PPresetPath, JsonConvert.SerializeObject(PPresets, Formatting.Indented));
-			}
+				//Thread.Sleep(2500);	//Test
+				System.Collections.Generic.IEnumerator<Preset> pstEnu;
+				if (IsNegative)
+					pstEnu = NPresets.GetEnumerator();
+				else
+					pstEnu = PPresets.GetEnumerator();
+				ushort index = 0;
+				do
+				{
+					pstEnu.MoveNext();
+					index++;
+				}
+				while (pstEnu.Current.Name != presetName);
+				index--;    //List index starts from 0.
+				pstEnu.Current.Prompts = updatedPrompts;
+				pstEnu.Current.Notes = updatedNotes;
+				if (IsNegative)
+				{
+					NPresets[index] = pstEnu.Current;
+					File.WriteAllText(NPresetPath, JsonConvert.SerializeObject(NPresets, Formatting.Indented));
+				}
+				else
+				{
+					PPresets[index] = pstEnu.Current;
+					File.WriteAllText(PPresetPath, JsonConvert.SerializeObject(PPresets, Formatting.Indented));
+				}
+			});
+			task.Start();
+			return task;
 		}
 
 		public SharedPresetVM()
 		{
 			LoadPresets(false);
 			LoadPresets(true);
+			//Do this so the ObservableCollection can be shared between threads
+			BindingOperations.EnableCollectionSynchronization(PPresets, new object());
+			BindingOperations.EnableCollectionSynchronization(NPresets, new object());
 		}
 	}
 }

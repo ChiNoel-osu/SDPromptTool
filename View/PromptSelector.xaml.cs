@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using static SDPromptTool.ViewModel.PromptSelectorVM;
@@ -130,7 +131,7 @@ namespace SDPromptTool.View
 			wnd.Show();
 			PSaveBtn.IsEnabled = NSaveBtn.IsEnabled = false;
 		}
-		private void SavePresetWndClosed(object sender, EventArgs e)
+		private async void SavePresetWndClosed(object sender, EventArgs e)	//Adding preset is now async
 		{
 			if (((SavePresetWnd)sender).SnapsToDevicePixels)    //Saving?
 			{
@@ -140,13 +141,13 @@ namespace SDPromptTool.View
 				{   //Negative prompts saving
 					preset.Prompts = NPromptsBox.Text;
 					preset.Notes = NNotes.Text;
-					MainWindow.MainVM.Presets.AddNewPreset(preset, MainWindow.MainVM.Presets.NPresets, true);
+					await MainWindow.MainVM.Presets.AddNewPreset(preset, MainWindow.MainVM.Presets.NPresets, true);
 				}
 				else
 				{   //Positive prompts saving
 					preset.Prompts = PPromptsBox.Text;
 					preset.Notes = PNotes.Text;
-					MainWindow.MainVM.Presets.AddNewPreset(preset, MainWindow.MainVM.Presets.PPresets, false);
+					await MainWindow.MainVM.Presets.AddNewPreset(preset, MainWindow.MainVM.Presets.PPresets, false);
 				}
 			}
 			PSaveBtn.IsEnabled = NSaveBtn.IsEnabled = true;

@@ -100,16 +100,16 @@ namespace SDPromptTool.View
 			NNotes.Clear();
 		}
 		#region Save Button Logics
-		private void PSaveBtn_Click(object sender, RoutedEventArgs e)
+		private async void PSaveBtn_Click(object sender, RoutedEventArgs e)
 		{
 			Preset something = (Preset)PList.SelectedItem;
 			int selectedIndex = PList.SelectedIndex;
 			if (something is not null)
 			{
-				MainWindow.MainVM.Presets.UpdatePreset(something.Name, false, PPromptsBox.Text, PNotes.Text);
+				await MainWindow.MainVM.Presets.UpdatePreset(something.Name, false, PPromptsBox.Text, PNotes.Text);
 				PSavedTimer.Tick += PSavedTimer_Tick;
 				PSavedTimer.Start();    //Wait 1 sec (see start of this class) to play animation.
-				PList.SelectedIndex = selectedIndex;
+				PList.SelectedIndex = selectedIndex;	//TODO: This stopped working after implementing async.
 				PSaveBtn.Foreground = new SolidColorBrush(Colors.Lime); //Set the text green.
 			}
 		}
@@ -121,16 +121,16 @@ namespace SDPromptTool.View
 			storyboard.Children.Add(initColorAnimation(PSaveBtn, Colors.Lime, Colors.White, new TimeSpan(0, 0, 0), new TimeSpan(0, 0, 2), "Foreground.(SolidColorBrush.Color)"));
 			storyboard.Begin();
 		}
-		private void NSaveBtn_Click(object sender, RoutedEventArgs e)
+		private async void NSaveBtn_Click(object sender, RoutedEventArgs e)
 		{
 			Preset something = (Preset)NList.SelectedItem;
 			int selectedIndex = NList.SelectedIndex;
 			if (something is not null)
 			{
-				MainWindow.MainVM.Presets.UpdatePreset(something.Name, true, NPromptsBox.Text, NNotes.Text);
+				await MainWindow.MainVM.Presets.UpdatePreset(something.Name, true, NPromptsBox.Text, NNotes.Text);
 				NSavedTimer.Tick += NSavedTimer_Tick;
 				NSavedTimer.Start();    //Wait 1 sec to play animation.
-				NList.SelectedIndex = selectedIndex;
+				NList.SelectedIndex = selectedIndex;    //TODO: This stopped working after implementing async.
 				NSaveBtn.Foreground = new SolidColorBrush(Colors.Lime); //Set the text green.
 			}
 		}
@@ -143,9 +143,9 @@ namespace SDPromptTool.View
 		}
 		#endregion
 		#endregion
-		private void SavePresetWndClosed(object sender, EventArgs e)
+		private async void SavePresetWndClosed(object sender, EventArgs e)	//Async yay
 		{
-			if (((SavePresetWnd)sender).SnapsToDevicePixels)    //Check if IsSaving.
+			if (((SavePresetWnd)sender).SnapsToDevicePixels)    //Saving?
 			{
 				Preset preset = new Preset();
 				preset.Name = ((Border)((SavePresetWnd)sender).Content).Tag as string;
@@ -153,13 +153,13 @@ namespace SDPromptTool.View
 				{   //Negative prompts saving
 					preset.Prompts = NPromptsBox.Text;
 					preset.Notes = NNotes.Text;
-					MainWindow.MainVM.Presets.AddNewPreset(preset, MainWindow.MainVM.Presets.NPresets, true);
+					await MainWindow.MainVM.Presets.AddNewPreset(preset, MainWindow.MainVM.Presets.NPresets, true);
 				}
 				else
 				{   //Positive prompts saving
 					preset.Prompts = PPromptsBox.Text;
 					preset.Notes = PNotes.Text;
-					MainWindow.MainVM.Presets.AddNewPreset(preset, MainWindow.MainVM.Presets.PPresets, false);
+					await MainWindow.MainVM.Presets.AddNewPreset(preset, MainWindow.MainVM.Presets.PPresets, false);
 				}
 			}
 			PNewBtn.IsEnabled = NNewBtn.IsEnabled = true;
@@ -173,7 +173,7 @@ namespace SDPromptTool.View
 				PPromptsBox.Text = preset.Prompts;
 				PNotes.Text = preset.Notes;
 			}
-			catch (IndexOutOfRangeException)
+			catch (IndexOutOfRangeException)	//When nothing's selected, the index will be -1
 			{ }
 		}
 		private void NListChanged(object sender, SelectionChangedEventArgs e)

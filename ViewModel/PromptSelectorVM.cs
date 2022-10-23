@@ -50,6 +50,13 @@ namespace SDPromptTool.ViewModel
 				IsNotSearching = true;
 				return;
 			}
+			if(tagResponse.StatusCode==System.Net.HttpStatusCode.Forbidden)
+			{
+				MessageBox.Show("Status 403 Forbidden.\nYou can access the API, but sth is wrong with ur VPN or network and the API started to check ur connection.\nI've yet to find a solution for this....\nRequest Uri: "+tagResponse.RequestMessage.RequestUri.AbsoluteUri,"Connecton error.");
+				TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false });
+				IsNotSearching = true;
+				return;
+			}
 			JsonDocument jsonDocument = JsonDocument.Parse(await tagResponse.Content.ReadAsStringAsync());
 			JsonElement jsonRoot = jsonDocument.RootElement;
 			int arrLength = jsonRoot.GetArrayLength();
@@ -90,6 +97,11 @@ namespace SDPromptTool.ViewModel
 					MessageBox.Show("WTF Mate");
 			}
 			return prompts.Replace('_', ' ');
+		}
+
+		public PromptSelectorVM()
+		{	//Add one custom tag first the window's loaded.
+			TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false }); 
 		}
 	}
 }

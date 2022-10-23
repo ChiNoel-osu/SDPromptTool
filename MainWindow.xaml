@@ -30,16 +30,16 @@
 				<view:PromptSelector />
 			</TabItem>
 			<TabItem Style="{StaticResource TabItemStyle1}"
-					 Header="Danbooru Tags Wiki"
-					 Background="Transparent"
-					 Foreground="White">
-				<view:WebTab />
-			</TabItem>
-			<TabItem Style="{StaticResource TabItemStyle1}"
 					 Header="Preset Manager"
 					 Background="Transparent"
 					 Foreground="White">
 				<view:PresetManager />
+			</TabItem>
+			<TabItem Style="{StaticResource TabItemStyle1}"
+					 Header="Danbooru Tags Wiki"
+					 Background="Transparent"
+					 Foreground="White">
+				<view:WebTab />
 			</TabItem>
 			<TabItem Style="{StaticResource TabItemStyle1}"
 					 Header="Settings"
