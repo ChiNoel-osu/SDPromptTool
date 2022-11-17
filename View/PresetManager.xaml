@@ -8,14 +8,15 @@
 			 d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
 			 mc:Ignorable="d"
 			 d:DesignHeight="420"
-			 d:DesignWidth="580">
-	<UserControl.Resources>
+			 d:DesignWidth="580"
+			 KeyDown="UserControl_KeyDown">
+	<d:UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/GlobalResDictionary.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
-	</UserControl.Resources>
+	</d:UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="2*" />

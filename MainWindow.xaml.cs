@@ -14,7 +14,6 @@ namespace SDPromptTool
 		public MainWindow()
 		{
 			InitializeComponent();
-
 		}
 
 		private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -34,6 +33,9 @@ namespace SDPromptTool
 						break;
 					case Key.D4:
 						MainTab.SelectedIndex = 3;
+						break;
+					case Key.D5:
+						MainTab.SelectedIndex = 4;
 						break;
 					default:
 						break;

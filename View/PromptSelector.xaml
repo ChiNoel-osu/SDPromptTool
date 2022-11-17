@@ -7,15 +7,19 @@
 			 xmlns:local="clr-namespace:SDPromptTool.View"
 			 xmlns:viewmodel="clr-namespace:SDPromptTool.ViewModel"
 			 d:DataContext="{d:DesignInstance Type=viewmodel:MainViewModel}"
+			 xmlns:converter="clr-namespace:SDPromptTool.ViewModel.Converter"
 			 mc:Ignorable="d"
 			 d:DesignHeight="420"
 			 d:DesignWidth="580">
-	<UserControl.Resources>
+	<d:UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/GlobalResDictionary.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
+	</d:UserControl.Resources>
+	<UserControl.Resources>
+		<converter:ListTextBoxWidthConverter x:Key="LTBWConverter" />
 	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -294,7 +298,7 @@
 						Content="Search!"
 						IsEnabled="{Binding PSVM.IsNotSearching, Mode=OneWay}"
 						IsEnabledChanged="SearchBtn_IsEnabledChanged"
-						Command="{Binding PSVM.RefreshTagCommand}"/>
+						Command="{Binding PSVM.RefreshTagCommand}" />
 			</Grid>
 			<ListBox DockPanel.Dock="Bottom"
 					 x:Name="TagList"

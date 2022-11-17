@@ -118,7 +118,7 @@ namespace SDPromptTool.View
 			PSavedTimer.Stop();
 			Storyboard storyboard = new Storyboard();
 			//Slowly make it white again.
-			storyboard.Children.Add(initColorAnimation(PSaveBtn, Colors.Lime, Colors.White, new TimeSpan(0, 0, 0), new TimeSpan(0, 0, 2), "Foreground.(SolidColorBrush.Color)"));
+			storyboard.Children.Add(InitColorAnimation(PSaveBtn, Colors.Lime, Colors.White, new TimeSpan(0, 0, 0), new TimeSpan(0, 0, 2), "Foreground.(SolidColorBrush.Color)"));
 			storyboard.Begin();
 		}
 		private async void NSaveBtn_Click(object sender, RoutedEventArgs e)
@@ -138,7 +138,7 @@ namespace SDPromptTool.View
 		{
 			NSavedTimer.Stop();
 			Storyboard storyboard = new Storyboard();
-			storyboard.Children.Add(initColorAnimation(NSaveBtn, Colors.Lime, Colors.White, new TimeSpan(0, 0, 0), new TimeSpan(0, 0, 2), "Foreground.(SolidColorBrush.Color)"));
+			storyboard.Children.Add(InitColorAnimation(NSaveBtn, Colors.Lime, Colors.White, new TimeSpan(0, 0, 0), new TimeSpan(0, 0, 2), "Foreground.(SolidColorBrush.Color)"));
 			storyboard.Begin();
 		}
 		#endregion
@@ -188,7 +188,7 @@ namespace SDPromptTool.View
 			{ }
 		}
 
-		private ColorAnimation initColorAnimation(UIElement uIElement, Color from, Color to, TimeSpan beginTime, TimeSpan duration, string propertyPath)
+		private ColorAnimation InitColorAnimation(UIElement uIElement, Color from, Color to, TimeSpan beginTime, TimeSpan duration, string propertyPath)
 		{
 			ColorAnimation colorAnimation = new ColorAnimation { From = from, To = to, BeginTime = beginTime, Duration = duration };
 			Storyboard.SetTarget(colorAnimation, uIElement);
@@ -206,6 +206,11 @@ namespace SDPromptTool.View
 		{   //Index of 3 returns NList
 			if (e.ChangedButton == MouseButton.Right)
 				((ListBox)((Grid)Content).Children[3]).SelectedIndex = -1;
+		}
+
+		private void UserControl_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (Keyboard.IsKeyDown(Key.LeftCtrl));
 		}
 	}
 }

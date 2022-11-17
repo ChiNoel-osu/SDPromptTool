@@ -11,7 +11,7 @@
 		Width="600"
 		Background="#1E1E1E"
 		KeyDown="Window_KeyDown">
-	<Window.Resources> 
+	<Window.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="GlobalResDictionary.xaml" />
@@ -36,6 +36,12 @@
 				<view:PresetManager />
 			</TabItem>
 			<TabItem Style="{StaticResource TabItemStyle1}"
+					 Header="Misc.Tools"
+					 Background="Transparent"
+					 Foreground="White">
+				<view:MiscellaneousTools />
+			</TabItem>
+			<TabItem Style="{StaticResource TabItemStyle1}"
 					 Header="Danbooru Tags Wiki"
 					 Background="Transparent"
 					 Foreground="White">
@@ -45,7 +51,6 @@
 					 Header="Settings"
 					 Background="Transparent"
 					 Foreground="White">
-
 			</TabItem>
 		</TabControl>
 	</Grid>

@@ -1218,6 +1218,4 @@
 		</Style.Triggers>
 	</Style>
 	<!--#endregion-->
-
-	<converter:ListTextBoxWidthConverter x:Key="LTBWConverter" />
 </ResourceDictionary>

@@ -83,7 +83,7 @@ namespace SDPromptTool.ViewModel
 				{
 					string weightedTag = item.Tag.ToString();
 					for (sbyte b = 0; b < item.Weight; b++)
-						weightedTag = '{' + weightedTag + '}';
+						weightedTag = '(' + weightedTag + ')';
 					prompts += weightedTag + ", ";
 				}
 				else if (item.Weight < 0)
