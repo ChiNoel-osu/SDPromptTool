@@ -1218,4 +1218,6 @@
 		</Style.Triggers>
 	</Style>
 	<!--#endregion-->
+
+	<converter:MiscToolReplaceCharConverter x:Key="MTRCConverter" />
 </ResourceDictionary>

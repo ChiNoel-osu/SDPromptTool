@@ -2,19 +2,15 @@
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Printing;
-using System.Security.AccessControl;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using static SDPromptTool.ViewModel.SharedPresetVM;
 
 namespace SDPromptTool.ViewModel
 {
 	public partial class SharedPresetVM : ObservableObject
 	{
-		private readonly string PPresetPath = Directory.GetCurrentDirectory() + "\\UserPresets\\Positive.json";
-		private readonly string NPresetPath = Directory.GetCurrentDirectory() + "\\UserPresets\\Negative.json";
+		readonly string PPresetPath = Directory.GetCurrentDirectory() + "\\UserPresets\\Positive.json";
+		readonly string NPresetPath = Directory.GetCurrentDirectory() + "\\UserPresets\\Negative.json";
 		public class Preset
 		{
 			public string Name { get; set; }

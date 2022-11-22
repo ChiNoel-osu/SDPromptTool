@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using SDPromptTool.ViewModel;
 using static SDPromptTool.ViewModel.SharedPresetVM;
 //TODO: Ctrl+S in Prompts and Notes to save.
 namespace SDPromptTool.View
@@ -109,7 +101,7 @@ namespace SDPromptTool.View
 				await MainWindow.MainVM.Presets.UpdatePreset(something.Name, false, PPromptsBox.Text, PNotes.Text);
 				PSavedTimer.Tick += PSavedTimer_Tick;
 				PSavedTimer.Start();    //Wait 1 sec (see start of this class) to play animation.
-				PList.SelectedIndex = selectedIndex;	//TODO: This stopped working after implementing async.
+				PList.SelectedIndex = selectedIndex;    //TODO: This stopped working after implementing async.
 				PSaveBtn.Foreground = new SolidColorBrush(Colors.Lime); //Set the text green.
 			}
 		}
@@ -143,7 +135,7 @@ namespace SDPromptTool.View
 		}
 		#endregion
 		#endregion
-		private async void SavePresetWndClosed(object sender, EventArgs e)	//Async yay
+		private async void SavePresetWndClosed(object sender, EventArgs e)  //Async yay
 		{
 			if (((SavePresetWnd)sender).SnapsToDevicePixels)    //Saving?
 			{
@@ -173,7 +165,7 @@ namespace SDPromptTool.View
 				PPromptsBox.Text = preset.Prompts;
 				PNotes.Text = preset.Notes;
 			}
-			catch (IndexOutOfRangeException)	//When nothing's selected, the index will be -1
+			catch (IndexOutOfRangeException)    //When nothing's selected, the index will be -1
 			{ }
 		}
 		private void NListChanged(object sender, SelectionChangedEventArgs e)
@@ -210,7 +202,7 @@ namespace SDPromptTool.View
 
 		private void UserControl_KeyDown(object sender, KeyEventArgs e)
 		{
-			if (Keyboard.IsKeyDown(Key.LeftCtrl));
+			if (Keyboard.IsKeyDown(Key.LeftCtrl)) ;
 		}
 	}
 }

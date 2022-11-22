@@ -11,90 +11,192 @@
 			 d:DesignHeight="420"
 			 d:DesignWidth="580">
 	<UserControl.Resources>
-		<converter:MiscToolReplaceCharConverter x:Key="MTRCConverter" />
-	</UserControl.Resources>
-	<d:UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="/GlobalResDictionary.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
-	</d:UserControl.Resources>
-	<Grid Margin="5">
-		<Grid.RowDefinitions>
-			<RowDefinition />
-			<RowDefinition />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition />
-			<ColumnDefinition />
-		</Grid.ColumnDefinitions>
-		<Grid Margin="0,0,5,5"
-			  Grid.Row="0"
-			  Grid.Column="0">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="25" />
-				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
-			</Grid.RowDefinitions>
-			<StackPanel Grid.Row="0"
-						Orientation="Horizontal">
-				<Label Content="Replace"
-					   FontSize="14"
-					   Foreground="White"
-					   Margin="0,-2,0,0" />
-				<TextBox Style="{DynamicResource UniTextBoxStyle}"
-						 Name="ReplaceFrom"
-						 FontSize="14"
-						 Text="{}{}"
-						 VerticalContentAlignment="Center"
-						 Height="20"
-						 Width="25"
-						 Margin="0,0,0,2"
-						 Padding="0,-3,0,0" />
-				<Label Content="with"
-					   FontSize="14"
-					   Foreground="White"
-					   Margin="0,-2,0,0" />
-				<TextBox Style="{DynamicResource UniTextBoxStyle}"
-						 Name="ReplaceTo"
-						 FontSize="14"
-						 Text="()"
-						 VerticalContentAlignment="Center"
-						 Height="20"
-						 Width="25"
-						 Margin="0,0,0,2"
-						 Padding="0,-3,0,0" />
-				<Button Style="{DynamicResource UniBtnStyle}"
-						Content="🔰"
-						Height="20"
-						Width="20"
-						Margin="20,0,0,2"
-						ToolTip="It's character-based.&#x0a;By default, it will replace all '{' with '(' and all '}' with ')'."
-						Command="{Binding MiscTools.ReplaceCharCommand}">
-					<Button.CommandParameter>
-						<MultiBinding Converter="{StaticResource MTRCConverter}">
-							<Binding ElementName="ReplaceFrom"
-									 Path="Text" />
-							<Binding ElementName="ReplaceTo"
-									 Path="Text" />
-							<Binding ElementName="TextBefore"
-									 Path="Text" />
-							<Binding ElementName="TextAfter" />
-						</MultiBinding>
-					</Button.CommandParameter>
-				</Button>
-			</StackPanel>
-			<TextBox Name="TextBefore"
-					 Grid.Row="1"
-					 AcceptsReturn="True"
-					 Style="{DynamicResource UniTextBoxStyle}"
-					 Margin="0,0,0,2" />
-			<TextBox Name="TextAfter"
-					 Grid.Row="2"
-					 AcceptsReturn="True"
-					 Style="{DynamicResource UniTextBoxStyle}"
-					 Margin="0,2,0,0" />
-		</Grid>
-	</Grid>
+	</UserControl.Resources>
+	<TabControl Background="Transparent"
+				TabStripPlacement="Left">
+		<TabItem Header="Replace Char"
+				 Foreground="White"
+				 Style="{StaticResource TabItemStyle1}"
+				 Background="#1E1E1E">
+			<Grid Margin="5,2,5,5"
+				  Grid.Row="0"
+				  Grid.Column="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="25" />
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				<StackPanel Grid.Row="0"
+							Orientation="Horizontal">
+					<Label Content="Replace"
+						   FontSize="14"
+						   Foreground="White"
+						   Margin="0,-2,0,0" />
+					<TextBox Style="{DynamicResource UniTextBoxStyle}"
+							 Name="ReplaceFrom"
+							 FontSize="14"
+							 Text="{}{}"
+							 VerticalContentAlignment="Center"
+							 Height="20"
+							 Width="25"
+							 Margin="0,0,0,2"
+							 Padding="0,-3,0,0" />
+					<Label Content="with"
+						   FontSize="14"
+						   Foreground="White"
+						   Margin="0,-2,0,0" />
+					<TextBox Style="{DynamicResource UniTextBoxStyle}"
+							 Name="ReplaceTo"
+							 FontSize="14"
+							 Text="()"
+							 VerticalContentAlignment="Center"
+							 Height="20"
+							 Width="25"
+							 Margin="0,0,0,2"
+							 Padding="0,-3,0,0" />
+					<Button Style="{DynamicResource UniBtnStyle}"
+							Content="🔰"
+							Height="20"
+							Width="20"
+							Margin="20,0,0,2"
+							ToolTip="It's character-based.&#x0a;By default, it will replace all '{' with '(' and all '}' with ')'."
+							Command="{Binding MiscTools.ReplaceCharCommand}">
+						<Button.CommandParameter>
+							<MultiBinding Converter="{StaticResource MTRCConverter}">
+								<Binding ElementName="ReplaceFrom"
+										 Path="Text" />
+								<Binding ElementName="ReplaceTo"
+										 Path="Text" />
+								<Binding ElementName="TextBefore"
+										 Path="Text" />
+								<Binding ElementName="TextAfter" />
+							</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+				</StackPanel>
+				<TextBox Name="TextBefore"
+						 Grid.Row="1"
+						 AcceptsReturn="True"
+						 Style="{DynamicResource UniTextBoxStyle}"
+						 Margin="0,0,0,2" />
+				<TextBox Name="TextAfter"
+						 Grid.Row="2"
+						 AcceptsReturn="True"
+						 Style="{DynamicResource UniTextBoxStyle}"
+						 Margin="0,2,0,0" />
+			</Grid>
+		</TabItem>
+		<TabItem Header="Emb. List"
+				 Foreground="White"
+				 Style="{StaticResource TabItemStyle1}"
+				 Background="#1E1E1E">
+			<Grid Margin="5">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="25" />
+				</Grid.RowDefinitions>
+				<DockPanel Grid.Row="1"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="2">
+					<Label Content="Path"
+						   Foreground="WhiteSmoke"
+						   DockPanel.Dock="Left"
+						   Padding="0,4,5,0" />
+					<TextBox DockPanel.Dock="Left"
+							 Background="Transparent"
+							 VerticalContentAlignment="Center"
+							 Style="{DynamicResource UniTextBoxStyle}"
+							 Text="{Binding MiscTools.EmbDir, UpdateSourceTrigger=PropertyChanged}" />
+				</DockPanel>
+				<Grid Grid.Column="0">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<DockPanel Grid.Row="0">
+						<Label DockPanel.Dock="Left"
+							   Content="Positive Embeddings"
+							   Foreground="WhiteSmoke"
+							   FontSize="14"
+							   Padding="5,0,0,0" />
+						<Button DockPanel.Dock="Right"
+								Width="60"
+								Style="{DynamicResource UniBtnStyle}"
+								Content="Save All"
+								HorizontalAlignment="Right"
+								Margin="0,0,5,3"
+								Padding="0,0,0,1.4"
+								Command="{Binding MiscTools.UpdateEmbJsonCommand}" />
+					</DockPanel>
+					<ListBox Grid.Row="1"
+							 Background="Transparent"
+							 Margin="0,0,5,5"
+							 ItemsSource="{Binding MiscTools.PEmbList}"
+							 d:ItemsSource="{d:SampleData ItemCount=8}">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<Label Foreground="White"
+										   FontSize="13"
+										   Content="{Binding EmbName}"
+										   ToolTip="{Binding EmbName}" />
+									<TextBox Foreground="White"
+											 VerticalContentAlignment="Center"
+											 Style="{DynamicResource UniTextBoxStyle}"
+											 Text="{Binding EmbTag}"
+											 ToolTip="{Binding EmbTag}" />
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+				<Grid Grid.Column="1">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="25" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
+					<Label Grid.Row="0"
+						   Content="Negative Embeddings"
+						   Foreground="WhiteSmoke"
+						   FontSize="14"
+						   Padding="5,0,0,0" />
+					<ListBox Grid.Row="1"
+							 Background="Transparent"
+							 Margin="0,0,5,5"
+							 ItemsSource="{Binding MiscTools.NEmbList}"
+							 d:ItemsSource="{d:SampleData ItemCount=8}">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<Label Foreground="White"
+										   FontSize="13"
+										   Content="{Binding EmbName}"
+										   ToolTip="{Binding EmbName}" />
+									<TextBox Foreground="White"
+											 VerticalContentAlignment="Center"
+											 Style="{DynamicResource UniTextBoxStyle}"
+											 Text="{Binding EmbTag}"
+											 ToolTip="{Binding EmbTag}" />
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+			</Grid>
+		</TabItem>
+		<TabItem Header="TBD"
+				 Foreground="White"
+				 Style="{StaticResource TabItemStyle1}"
+				 Background="#1E1E1E">
+		</TabItem>
+	</TabControl>
 </UserControl>

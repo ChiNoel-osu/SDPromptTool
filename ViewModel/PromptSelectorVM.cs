@@ -2,14 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace SDPromptTool.ViewModel
 {
@@ -46,13 +42,13 @@ namespace SDPromptTool.ViewModel
 			catch (Exception e)
 			{
 				MessageBox.Show("Use a VPN or try again:\n" + e.Message, "Cannot get list from Danbooru API.");
-				TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false });	//Custom tag.
+				TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false });  //Custom tag.
 				IsNotSearching = true;
 				return;
 			}
-			if(tagResponse.StatusCode==System.Net.HttpStatusCode.Forbidden)
+			if (tagResponse.StatusCode == System.Net.HttpStatusCode.Forbidden)
 			{
-				MessageBox.Show("Status 403 Forbidden.\nYou can access the API, but sth is wrong with ur VPN or network and the API started to check ur connection.\nI've yet to find a solution for this....\nRequest Uri: "+tagResponse.RequestMessage.RequestUri.AbsoluteUri,"Connecton error.");
+				MessageBox.Show("Status 403 Forbidden.\nYou can access the API, but sth is wrong with ur VPN or network and the API started to check ur connection.\nI've yet to find a solution for this....\nRequest Uri: " + tagResponse.RequestMessage.RequestUri.AbsoluteUri, "Connecton error.");
 				TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false });
 				IsNotSearching = true;
 				return;
@@ -68,7 +64,7 @@ namespace SDPromptTool.ViewModel
 				CLBI.Tag = arrEnu.Current.GetProperty("name").GetString();
 				TagList.Add(CLBI);
 			}
-			TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly=false });	//Custom tag.
+			TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false });  //Custom tag.
 			IsNotSearching = true;
 		}
 
@@ -100,8 +96,8 @@ namespace SDPromptTool.ViewModel
 		}
 
 		public PromptSelectorVM()
-		{	//Add one custom tag first the window's loaded.
-			TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false }); 
+		{   //Add one custom tag first the window's loaded.
+			TagList.Add(new CustomListBoxItem() { Tag = string.Empty, ReadOnly = false });
 		}
 	}
 }

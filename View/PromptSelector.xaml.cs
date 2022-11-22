@@ -1,13 +1,8 @@
 ﻿using SDPromptTool.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using static SDPromptTool.ViewModel.PromptSelectorVM;
 using static SDPromptTool.ViewModel.SharedPresetVM;
 
 namespace SDPromptTool.View
@@ -131,7 +126,7 @@ namespace SDPromptTool.View
 			wnd.Show();
 			PSaveBtn.IsEnabled = NSaveBtn.IsEnabled = false;
 		}
-		private async void SavePresetWndClosed(object sender, EventArgs e)	//Adding preset is now async
+		private async void SavePresetWndClosed(object sender, EventArgs e)  //Adding preset is now async
 		{
 			if (((SavePresetWnd)sender).SnapsToDevicePixels)    //Saving?
 			{

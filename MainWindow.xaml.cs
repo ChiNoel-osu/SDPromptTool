@@ -1,5 +1,4 @@
 ﻿using SDPromptTool.ViewModel;
-using System.Collections;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,9 +17,9 @@ namespace SDPromptTool
 
 		private void Window_KeyDown(object sender, KeyEventArgs e)
 		{
-			if(Keyboard.IsKeyDown(Key.LeftCtrl))
+			if (Keyboard.IsKeyDown(Key.LeftCtrl))
 			{
-				switch(e.Key)
+				switch (e.Key)
 				{
 					case Key.D1:
 						MainTab.SelectedIndex = 0;
