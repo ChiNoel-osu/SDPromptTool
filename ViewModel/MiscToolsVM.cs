@@ -154,7 +154,7 @@ namespace SDPromptTool.ViewModel
 		{
 			BindingOperations.EnableCollectionSynchronization(PEmbList, new object());
 			BindingOperations.EnableCollectionSynchronization(NEmbList, new object());
-			EmbDir = "V:\\NovelAI\\stable-diffusion-webui\\embeddings";
+			EmbDir = "<Your stable-diffusion-webui folder path here>\\embeddings";
 		}
 	}
 }
